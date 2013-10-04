@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<jbossesb parameterReloadSecs="5"
+          xmlns="http://anonsvn.labs.jboss.com/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.3.0.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="http://anonsvn.labs.jboss.com/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.3.0.xsd 
+                     http://anonsvn.jboss.org/repos/labs/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.3.0.xsd">
+    
+    <providers>
+        <jms-provider name="JBossMQ" connection-factory="ConnectionFactory">
+            <jms-bus busid="demoGateway">
+                <jms-message-filter dest-type="QUEUE" dest-name="demoGateway"/>
+            </jms-bus>
+        </jms-provider>        
+    </providers>
+    <services>
+        <service category="ESBKoman" name="SimplePrint" invmScope="GLOBAL" description="A demo ESB from JMS">
+            <listeners>
+                <jms-listener name="demoGateway" busidref="demoGateway" is-gateway="true"/>
+            </listeners>
+            <actions>
+                <action name="print-before" class="org.jboss.soa.esb.actions.SystemPrintln">
+                    <property name="message" value="Let's start with a simple example"/>
+                </action>
+                <action class="org.openrap.basicjbossesb.esblisteningonjms.ESBAction" name="esbAction" process="runMe"/>
+                <!--
+                <action name="request-mapper" class="org.openrap.basicjbossesb.esblisteningonjms.HelloWorldFirstAction"/>
+                
+                <action name="soapui-client-action" class="org.jboss.soa.esb.actions.soap.SOAPClient">
+                    <property name="wsdl" value="http://127.0.0.1:8080/ESB-WAR-WS/HelloWorldWS?wsdl" />
+                    <property name="responseAsOgnlMap" value="true" />
+                    <property name="SOAPAction" value="sayHello"/>
+                    <property name="SOAPService" value="{http://webservice_consumer1/helloworld}HelloWorldWSService" />
+                </action>                
+                <action name="response-mapper" class="org.openrap.basicjbossesb.esblisteningonjms.HelloWorldSecondAction"/>
+                <action class="org.jboss.soa.esb.actions.EJBProcessor" name="JMSTransformer">
+                    <property name="ejb3" value="true"/>
+                    <property name="jndi-name" value="EE-ESB/JMSTransformer"/>
+                    <property name="initial-context-factory" value="org.jnp.interfaces.NamingContextFactory"/>
+                    <property name="provider-url" value="localhost:1099"/>
+                    <property name="method" value="transform"/>
+                </action>                -->
+            </actions>
+        </service>
+    </services>
+</jbossesb>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--                <action class="ee.esb.ESBAction" name="esbAction" process="runMe"/>
+                
+                <action name="request-mapper" class="ee.esb.HelloWorldFirstAction"/>
+                <action name="soapui-client-action" class="org.jboss.soa.esb.actions.soap.SOAPClient">
+                    <property name="wsdl" value="http://127.0.0.1:8080/ESB-WAR-WS/HelloWorldWS?wsdl" />
+                    <property name="responseAsOgnlMap" value="true" />
+                    <property name="SOAPAction" value="sayHello"/>
+                    <property name="SOAPService" value="{http://webservice_consumer1/helloworld}HelloWorldWSService" />
+                </action>                
+                <action name="response-mapper" class="ee.esb.HelloWorldSecondAction"/>
+                
+<action class="org.jboss.soa.esb.actions.EJBProcessor" name="JMSTransformer">
+    <property name="ejb3" value="true"/>
+    <property name="jndi-name" value="EE-ESB/JMSTransformer"/>
+    <property name="initial-context-factory" value="org.jnp.interfaces.NamingContextFactory"/>
+    <property name="provider-url" value="localhost:1099"/>
+    <property name="method" value="transform"/>
+</action>                              
+<action name="print-after" class="org.jboss.soa.esb.actions.SystemPrintln">
+    <property name="message" value="Simple example ending"/>
+</action>                  -->
