@@ -17,11 +17,11 @@
             <listeners>
                 <jms-listener name="demoGateway" busidref="demoGateway" is-gateway="true"/>
             </listeners>
-            <actions>
+            <actions mep="OneWay">
                 <action name="print-before" class="org.jboss.soa.esb.actions.SystemPrintln">
                     <property name="message" value="Let's start with a simple example"/>
                 </action>
-                <action class="org.openrap.basicjbossesb.esblisteningonjms.ESBAction" name="esbAction" process="runMe"/>
+                <action class="org.openrap.basicjbossesb.esblisteningonjms.ESBAction" name="esbAction" process="runMe" />
                 <!--
                 <action name="request-mapper" class="org.openrap.basicjbossesb.esblisteningonjms.HelloWorldFirstAction"/>
                 
